@@ -16,8 +16,5 @@ describe 'Application', ->
   it 'has a config', ->
     assert.equal application.config instanceof Object, true
 
-  it 'can register controllers', ->
-    application.register_controllers()
-
   it 'has a start method', ->
     assert.equal application.start?, true

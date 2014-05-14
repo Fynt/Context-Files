@@ -6,17 +6,11 @@ module.exports = class Application
   constructor: (@config) ->
     @core = express()
 
-  register_controllers: (controller_dir='controllers') ->
-    controller_files = fs.readdirSync "#{__dirname}/#{controller_dir}"
-    controller_files.forEach (controller_file) =>
-      controller_name = controller_file.split(".", 1)[0]
-      controller_class = require "./#{controller_dir}/#{controller_file}"
+    if @config.routes?
+      @register_routes @config.routes
 
-      @register_controller controller_name, controller_class
-
-  register_controller: (controller_name, controller_class) ->
-    controller = new controller_class @
-    for k, v in controller
+  register_routes: (routes_config) ->
+    for k, v in routes_config
       console.log k, v
 
   start: ->
