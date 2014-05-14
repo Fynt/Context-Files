@@ -1,0 +1,2 @@
+default:
+  'GET /health-check': 'DefaultController#health_check'

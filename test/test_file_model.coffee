@@ -1,7 +1,7 @@
 assert = require 'assert'
-
 global.config = require('konfig')()
 FileModel = require '../server/models/FileModel'
+
 
 describe 'File', ->
   file = null
@@ -13,7 +13,7 @@ describe 'File', ->
     file.save done
 
   describe 'Model', ->
-    
+
     it 'can find by id', ->
       FileModel.findById 1, (err, file) ->
         assert.equal 1, file.id

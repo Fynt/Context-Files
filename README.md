@@ -1,7 +1,16 @@
 Schema
 ======
 
+Usage
+=====
 
+Making sure you have `coffee` installed, it's just a matter of installing the package, and running the server...
+
+```bash
+$ npm -g install coffee-script
+$ npm install
+$ coffee -w server.coffee
+```
 
 Testing
 =======
