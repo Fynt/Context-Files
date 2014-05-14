@@ -2,14 +2,15 @@ Schema
 ======
 
 
+
 Testing
 =======
 
 You can run tests with the following command:
 
-  ```bash
-  $ npm test
-  ```
+```bash
+$ npm test
+```
 
 API
 ===
@@ -55,6 +56,7 @@ Images should get resized using a fill method, though the following methods shou
 Will return a resized image, assuming the source file can be converted to an image.
 
 `GET /image/width/:width/:file_id.:format`
+
 `GET /image/height/:height/:file_id.:format`
 
 These routes will resize based on the provided parameter width/height, but will maintain aspect ratio based on the original file.
@@ -62,6 +64,7 @@ These routes will resize based on the provided parameter width/height, but will 
 `GET /image/scale/:scale/:file_id.:format`
 
 `GET /image/:width/:height/:crop_origin_x/:crop_origin_y/:file_id.:format`
+
 `GET /image/:scale/:width/:height/:crop_origin_x/:crop_origin_y/:file_id.:format`
 
 The same as the other resize routes, but provides paramaters for cropping.
