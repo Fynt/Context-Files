@@ -15,9 +15,11 @@ API Endpoints
 
 Allows you to upload a file, and will return json containing some file metadata.
 
+Needs to support chunked uploads via things like plupload.
+
 `GET /file/:id`
 
-Returns json containing some file metadata.
+Returns json containing everything we know about a file, including any relationships for resized images.
 
 `DELETE /file/:id`
 
@@ -29,12 +31,16 @@ Allows us to view files on the front end. Will return the raw file data from the
 
 `GET /file/download/:id`
 
+Allows us to generate download links on the front end. Will return the file data as an attachment with the right Content-Type header.
+
 Image Endpoints
 ---------------
 
-Allows us to generate download links on the front end. Will return the file data as an attachment with the right Content-Type header.
+Image methods assume the following:
+  - All image methods require a valid :file_id, otherwise a 404
+  - All image methods require the source file can be converted to an image, otherwise a 400
 
-Images should get resized using a fill method, though an of the following method should let you specify fit=true to make sure the image fits within the dimensions provided, though the final image dimensions may not be exactly the same as the requested parameters.
+Images should get resized using a fill method, though the following methods should let you specify fit=true to make sure the image fits within the dimensions provided, though the final image dimensions may not be exactly the same as the requested parameters.
 
 `GET /image/:width/:height/:file_id.:format`
 
@@ -45,6 +51,9 @@ Will return a resized image, assuming the source file can be converted to an ima
 
 These routes will resize based on the provided parameter width/height, but will maintain aspect ratio based on the original file.
 
+`GET /image/scale/:scale/:file_id.:format`
+
 `GET /image/:crop_origin_x/:crop_origin_y/:width/:height/:file_id.:format`
+`GET /image/:scale/:crop_origin_x/:crop_origin_y/:width/:height/:file_id.:format`
 
 The same as the other resize routes, but provides paramaters for cropping.

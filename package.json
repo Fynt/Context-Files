@@ -9,6 +9,7 @@
   "author": "Ryan Leland",
   "license": "ISC",
   "dependencies": {
+    "caminte": "0.0.16",
     "coffee-script": "^1.7.1",
     "express": "^4.2.0",
     "konfig": "^0.1.1",
