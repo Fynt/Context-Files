@@ -45,6 +45,6 @@ Will return a resized image, assuming the source file can be converted to an ima
 
 These routes will resize based on the provided parameter width/height, but will maintain aspect ratio based on the original file.
 
-`GET /image/:crop_origin_x/:crop_origin_y/:width/:height/:file_id.:format
+`GET /image/:crop_origin_x/:crop_origin_y/:width/:height/:file_id.:format`
 
 The same as the other resize routes, but provides paramaters for cropping.
