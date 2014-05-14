@@ -2,6 +2,14 @@ Schema
 ======
 
 
+Testing
+=======
+
+You can run tests with the following command:
+
+  ```bash
+  $ npm test
+  ```
 
 API
 ===
@@ -53,7 +61,7 @@ These routes will resize based on the provided parameter width/height, but will 
 
 `GET /image/scale/:scale/:file_id.:format`
 
-`GET /image/:crop_origin_x/:crop_origin_y/:width/:height/:file_id.:format`
-`GET /image/:scale/:crop_origin_x/:crop_origin_y/:width/:height/:file_id.:format`
+`GET /image/:width/:height/:crop_origin_x/:crop_origin_y/:file_id.:format`
+`GET /image/:scale/:width/:height/:crop_origin_x/:crop_origin_y/:file_id.:format`
 
 The same as the other resize routes, but provides paramaters for cropping.

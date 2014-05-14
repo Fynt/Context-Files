@@ -1,20 +1,18 @@
-assert = require "assert"
-ActiveRecord = require 'activerecord'
-FileModel = require "../lib/models/FileModel"
+assert = require 'assert'
+FileModel = require '../server/models/FileModel'
 
 describe 'File', ->
   file = null
 
   beforeEach (done) ->
     file = new FileModel
-    file.save (err) ->
-      if err
-        console.log err
-      else
-        done()
+    file.save done
 
   it 'should be a Model', ->
-    assert.equal file instanceof ActiveRecord.Model, true
+    assert.equal file instanceof FileModel, true
 
   it 'should have an id', ->
     assert.equal file.id?, true
+
+  it 'should have a created date', ->
+    assert.equal file.created?, true
