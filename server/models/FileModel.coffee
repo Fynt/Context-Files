@@ -1,5 +1,7 @@
-mime = require 'mime'
+
 schema = require './schema'
+
+MockStorage = require '../lib/Storage/Mock'
 
 File = schema.define 'File',
   source:
@@ -15,7 +17,7 @@ File = schema.define 'File',
 
 File.validatesPresenceOf 'source', 'extension'
 
-File::mimetype = ->
-  mime.lookup @extension
+File::storage = ->
+  new MockStorage @
 
 module.exports = File

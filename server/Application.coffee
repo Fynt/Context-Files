@@ -21,6 +21,8 @@ module.exports = class Application
     if @config.routes?
       @register_routes @config.routes
 
+  # Parses routes from the config and registers them
+  #
   # @param [Object] routes_config
   register_routes: (routes_config) ->
     for method_path, controller_action of routes_config

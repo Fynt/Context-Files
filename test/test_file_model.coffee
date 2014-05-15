@@ -1,6 +1,8 @@
 assert = require 'assert'
 global.config = require('konfig')()
+
 FileModel = require '../server/models/FileModel'
+MockStorage = require '../server/lib/Storage/Mock'
 
 
 describe 'File', ->
@@ -39,6 +41,6 @@ describe 'File', ->
       file.isValid (valid) ->
         assert.equal valid, true
 
-    it 'has a mimetype method', ->
-      mimetype = file.mimetype()
-      assert.equal mimetype, 'text/plain'
+    it 'has storage', ->
+      storage = file.storage()
+      assert.equal storage instanceof MockStorage, true

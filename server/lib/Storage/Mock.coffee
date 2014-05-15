@@ -1,3 +1,3 @@
-Storage = require '../lib/Storage'
+Storage = require '../Storage'
 
 module.exports = class MockStorage extends Storage

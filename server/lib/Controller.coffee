@@ -1,5 +1,6 @@
 # The base Controller class
 #
+# @abstract
 # @since 0.0.1
 module.exports = class Controller
 
@@ -24,7 +25,7 @@ module.exports = class Controller
   # @param [String] field
   # @param [String, Null] value
   header: (field, value=null) ->
-    @response.header field value
+    @response.header field, value
 
   # Will write content and send the response
   #
