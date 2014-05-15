@@ -37,6 +37,10 @@ module.exports = class Controller
   #
   # @param [Object, String] result The value you want to send.
   respond: (result) ->
+    # End early if we're dealing with a binary Buffer object.
+    if result instanceof Buffer
+      return @response.end result
+
     # Make sure we're always ending with a string.
     if result instanceof Object
       @header 'Content-Type', 'application/json'

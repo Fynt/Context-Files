@@ -21,11 +21,8 @@ module.exports = class FileController extends Controller
 
   delete_file_action: ->
     FileModel.findById @params.id, (error, file) ->
-      if error
-        @abort 500
-
-      if not file
-        @abort 404
+      @abort 500 if error
+      @abort 404 if not file
 
       file.destroy (err) ->
         if file and not error

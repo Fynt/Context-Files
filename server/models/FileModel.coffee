@@ -1,7 +1,7 @@
 
 schema = require './schema'
 
-MockStorage = require '../lib/Storage/Mock'
+LocalStorage = require '../lib/Storage/Local'
 
 File = schema.define 'File',
   source:
@@ -18,6 +18,6 @@ File = schema.define 'File',
 File.validatesPresenceOf 'source', 'extension'
 
 File::storage = ->
-  new MockStorage @
+  new LocalStorage @
 
 module.exports = File

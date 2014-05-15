@@ -19,5 +19,7 @@ module.exports = class Storage
   filename: ->
     @file.source.split('/').pop()
 
+  # Should return the file content
+  #
   # @abstract
   content: -> throw Error "Not implemented"
