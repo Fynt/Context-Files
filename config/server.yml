@@ -1,6 +1,10 @@
 default:
   port: 5000
   db:
-    driver: memory
+    driver: sqlite3
+    database: ./data/dev.db
 
 test:
+  port: 5001
+  db:
+    driver: memory

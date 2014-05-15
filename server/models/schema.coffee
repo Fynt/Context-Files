@@ -1,4 +1,6 @@
 caminte = require 'caminte'
 Schema = caminte.Schema
 
-module.exports = new Schema global.config.server.db.driver
+db_config = global.config.server.db
+
+module.exports = new Schema db_config.driver, db_config
