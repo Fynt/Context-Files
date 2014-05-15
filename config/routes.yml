@@ -1,2 +1,3 @@
 default:
+  'GET /file/:id': 'FileController#get_file'
   'GET /health-check': 'DefaultController#health_check'
