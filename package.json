@@ -1,6 +1,6 @@
 {
   "name": "Context-Files",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "File management module for context",
   "main": "server.coffee",
   "scripts": {

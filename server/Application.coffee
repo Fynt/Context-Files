@@ -1,16 +1,27 @@
 fs = require 'fs'
 express = require 'express'
 
+# The Application class
+#
+# @since 0.0.0
 module.exports = class Application
 
+  # @property [String] The path to the Controller classes
   controllers_directory: "./controllers"
 
+  # @param [Object] config The Application config
   constructor: (@config) ->
     @core = express()
+    @initialize()
 
+  # Initialize the application by registering routes, etc.
+  #
+  # @private
+  initialize: ->
     if @config.routes?
       @register_routes @config.routes
 
+  # @param [Object] routes_config
   register_routes: (routes_config) ->
     for method_path, controller_action of routes_config
       method_path = method_path.split " "
@@ -27,6 +38,10 @@ module.exports = class Application
 
       @register_route method, path, controller, action
 
+  # @param [String] method
+  # @param [String] path
+  # @param [Controller] controller
+  # @param [String] action
   register_route: (method, path, controller, action) ->
     route = @core.route path
     handle = (request, response) ->
@@ -39,5 +54,6 @@ module.exports = class Application
       when 'PUT' then route.put handle
       when 'DELETE' then route.delete handle
 
+  # Starts the event loop to listen for requests.
   start: ->
     @core.listen @config.server.port

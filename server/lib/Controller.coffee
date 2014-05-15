@@ -1,5 +1,9 @@
+# The base Controller class
+#
+# @since 0.0.0
 module.exports = class Controller
 
+  # @param [Application] application The Application instance
   constructor: (@application) ->
 
   call_action: (action, request, response) ->
@@ -18,9 +22,14 @@ module.exports = class Controller
 
     @response.end result
 
+  # Will abort the request and set the status code
+  #
+  # @param [Integer] code http status code
   abort: (code) ->
     @response.status(code)
     @response.end()
 
-  json_encode: (object) ->
-    "" + JSON.stringify object
+  # @param [Object] value The value to encode
+  # @return [String] json encoded object
+  json_encode: (value) ->
+    "" + JSON.stringify value

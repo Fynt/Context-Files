@@ -2,7 +2,9 @@ Schema
 ======
 
 Usage
-=====
+-----
+
+###Installation
 
 Making sure you have `coffee` installed, it's just a matter of installing the package, and running the server...
 
@@ -12,8 +14,19 @@ $ npm install
 $ coffee -w server.coffee
 ```
 
+###Docs
+
+You can generate docs using the following:
+
+```bash
+$ npm install -g codo
+$ codo
+```
+
+You can now browse to `./docs/index.html` in your browser of choice!
+
 Testing
-=======
+-------
 
 You can run tests with the following command:
 
@@ -22,12 +35,11 @@ $ npm test
 ```
 
 API
-===
+---
 
 It will be assumed that by the time the following functionality is added to Context-Data, that each request will have a user session and/or token to provide permissions around creating and deleting files at the minimum.
 
-API Endpoints
--------------
+###API Endpoints
 
 `POST /file`
 
@@ -51,10 +63,9 @@ Allows us to view files on the front end. Will return the raw file data from the
 
 Allows us to generate download links on the front end. Will return the file data as an attachment with the right Content-Type header.
 
-Image Endpoints
----------------
+###Image Endpoints
 
-Image methods assume the following:
+#####Image methods assume the following:
   - All image methods require a valid :file_id, otherwise a 404
   - All image methods require the source file can be converted to an image, otherwise a 400
 
