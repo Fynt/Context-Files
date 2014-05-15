@@ -17,3 +17,24 @@ module.exports = class FileController extends Controller
         @respond file
       else
         @abort 404
+
+  delete_file_action: ->
+    FileModel.findById @params.id, (err, file) ->
+      if err
+        @abort 500
+
+      if not file
+        @abort 404
+
+      file.destroy (err) ->
+        if file and not error
+          @respond file
+        else
+          @abort 404
+
+
+  show_file_action: ->
+    @respond "LOL"
+
+  download_file_action: ->
+    @respond "LOL"

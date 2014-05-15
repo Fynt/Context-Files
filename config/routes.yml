@@ -1,4 +1,7 @@
 default:
   '* /file': 'FileController#upload_file'
   'GET /file/:id': 'FileController#get_file'
+  'DELETE /file/:id': 'FileController#delete_file'
+  'GET /file/show/:id': 'FileController#show_file'
+  'GET /file/download/:id': 'FileController#download_file'
   'GET /health-check': 'DefaultController#health_check'
