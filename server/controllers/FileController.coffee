@@ -1,6 +1,7 @@
 Controller = require '../lib/Controller'
 FileModel = require '../models/FileModel'
 
+# @todo Reduce some code duplication in here.
 module.exports = class FileController extends Controller
 
   upload_file_action: ->
@@ -19,8 +20,8 @@ module.exports = class FileController extends Controller
         @abort 404
 
   delete_file_action: ->
-    FileModel.findById @params.id, (err, file) ->
-      if err
+    FileModel.findById @params.id, (error, file) ->
+      if error
         @abort 500
 
       if not file
@@ -32,13 +33,23 @@ module.exports = class FileController extends Controller
         else
           @abort 404
 
-
   show_file_action: ->
-    FileModel.findById @params.id, (err, file) ->
+    FileModel.findById @params.id, (error, file) =>
       if file and not error
-        @respond file
+        @content_type file.storage().mimetype()
+        @respond file.storage().content()
       else
         @abort 404
 
+  # Pretty much the same as the show_file_action, but it sets the correct header
+  # to force the file to be downloaded.
   download_file_action: ->
-    @respond "LOL"
+    FileModel.findById @params.id, (error, file) =>
+      if file and not error
+        filename = file.storage().filename()
+        @header "Content-Disposition", "inline; filename=\"#{filename}\""
+        @content_type "application/force-download"
+
+        @respond file.storage().content()
+      else
+        @abort 404

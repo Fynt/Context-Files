@@ -23,9 +23,15 @@ module.exports = class Controller
   # Sets a response header
   #
   # @param [String] field
-  # @param [String, Null] value
-  header: (field, value=null) ->
+  # @param [String] value
+  header: (field, value) ->
     @response.header field, value
+
+  # Sets the Content-Type header
+  #
+  # @param [String] value
+  content_type: (value) ->
+    @header 'Content-Type', value
 
   # Will write content and send the response
   #
@@ -41,7 +47,7 @@ module.exports = class Controller
   # Will abort the request and set the status code
   #
   # @param [Integer] code http status code
-  abort: (code) ->
+  abort: (code, message=null) ->
     @response.status(code)
     @response.end()
 
