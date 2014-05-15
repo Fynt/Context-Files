@@ -38,3 +38,7 @@ describe 'File', ->
     it 'should be valid', ->
       file.isValid (valid) ->
         assert.equal valid, true
+
+    it 'has a mimetype method', ->
+      mimetype = file.mimetype()
+      assert.equal mimetype, 'text/plain'

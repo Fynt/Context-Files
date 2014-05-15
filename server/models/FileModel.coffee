@@ -1,3 +1,4 @@
+mime = require 'mime'
 schema = require './schema'
 
 File = schema.define 'File',
@@ -13,5 +14,8 @@ File = schema.define 'File',
     default: Date.now
 
 File.validatesPresenceOf 'source', 'extension'
+
+File::mimetype = ->
+  mime.lookup @extension
 
 module.exports = File

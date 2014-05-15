@@ -1,11 +1,15 @@
 # The base Controller class
 #
-# @since 0.0.0
+# @since 0.0.1
 module.exports = class Controller
 
   # @param [Application] application The Application instance
   constructor: (@application) ->
 
+  # Called by the application when dispatching a request.
+  #
+  # @param [String] action The action you want called.
+  # @private
   call_action: (action, request, response) ->
     # Set some values on the controller instance that the action might want to
     # reference.
@@ -15,9 +19,20 @@ module.exports = class Controller
 
     @["#{action}_action"]()
 
+  # Sets a response header
+  #
+  # @param [String] field
+  # @param [String, Null] value
+  header: (field, value=null) ->
+    @response.header field value
+
+  # Will write content and send the response
+  #
+  # @param [Object, String] result The value you want to send.
   respond: (result) ->
     # Make sure we're always ending with a string.
     if result instanceof Object
+      @header 'Content-Type', 'application/json'
       result = @json_encode result
 
     @response.end result
@@ -29,6 +44,8 @@ module.exports = class Controller
     @response.status(code)
     @response.end()
 
+  # Encodes a value into json.
+  #
   # @param [Object] value The value to encode
   # @return [String] json encoded object
   json_encode: (value) ->
