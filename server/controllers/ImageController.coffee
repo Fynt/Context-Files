@@ -34,10 +34,8 @@ module.exports = class ImageController extends Controller
 
       resizer = new ImageResizer file
 
-      console.log resizer.resize @resize_params
-
-      #@content_type 'image/jpeg'
-      @respond "HI"
+      @content_type 'image/jpeg'
+      resizer.resize @resize_params(), @response
 
   find_or_resize_image: (done) ->
     @find_image (error, image) =>
