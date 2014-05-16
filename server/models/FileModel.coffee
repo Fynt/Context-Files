@@ -1,4 +1,3 @@
-
 schema = require './schema'
 
 LocalStorage = require '../lib/Storage/Local'
