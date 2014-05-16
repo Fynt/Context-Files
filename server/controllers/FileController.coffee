@@ -4,10 +4,11 @@ FileModel = require '../models/FileModel'
 # @todo Reduce some code duplication in here.
 module.exports = class FileController extends Controller
 
+  # @todo Make this real!
   upload_file_action: ->
     file = new FileModel
-      source: 'test.txt'
-      extension: 'txt'
+      source: 'test.jpg'
+      extension: 'jpg'
 
     file.save (err, file) =>
       @respond file

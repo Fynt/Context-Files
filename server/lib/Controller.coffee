@@ -43,8 +43,7 @@ module.exports = class Controller
 
     # Make sure we're always ending with a string.
     if result instanceof Object
-      @header 'Content-Type', 'application/json'
-      result = @json_encode result
+      return @response.json result
 
     @response.end result
 
@@ -54,10 +53,3 @@ module.exports = class Controller
   abort: (code, message=null) ->
     @response.status(code)
     @response.end()
-
-  # Encodes a value into json.
-  #
-  # @param [Object] value The value to encode
-  # @return [String] json encoded object
-  json_encode: (value) ->
-    "" + JSON.stringify value

@@ -1,6 +1,6 @@
 default:
   # File routes
-  'POST /file': 'FileController#upload_file'
+  '* /file': 'FileController#upload_file'
   'GET /file/:id': 'FileController#get_file'
   'DELETE /file/:id': 'FileController#delete_file'
   'GET /file/show/:id': 'FileController#show_file'
