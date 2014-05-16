@@ -19,7 +19,13 @@ module.exports = class Storage
   filename: ->
     @file.source.split('/').pop()
 
-  # Should return the file content
+  # Should read the file content
   #
   # @abstract
-  content: -> throw Error "Not implemented"
+  read: -> throw Error "Not implemented"
+
+  # Should write the file content
+  #
+  # @param [String, Buffer] data The data to write.
+  # @abstract
+  write: (data) -> throw Error "Not implemented"

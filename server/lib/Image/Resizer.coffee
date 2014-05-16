@@ -1,3 +1,3 @@
 gm = require 'gm'
 
-module.exports = class Resizer
+module.exports = class ImageResizer

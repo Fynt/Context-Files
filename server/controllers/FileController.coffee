@@ -14,10 +14,10 @@ module.exports = class FileController extends Controller
 
   get_file_action: ->
     FileModel.findById @params.id, (error, file) =>
-      if file and not error
-        @respond file
-      else
-        @abort 404
+      @abort 500 if error
+      @abort 404 if not file
+
+      @respond file
 
   delete_file_action: ->
     FileModel.findById @params.id, (error, file) ->
@@ -47,6 +47,6 @@ module.exports = class FileController extends Controller
         @header "Content-Disposition", "inline; filename=\"#{filename}\""
         @content_type "application/force-download"
 
-        @respond file.storage().content()
+        @respond file.storage().read()
       else
         @abort 404

@@ -6,5 +6,8 @@ module.exports = class MockStorage extends Storage
   mimetype: ->
     'text/plain'
 
-  content: ->
+  read: ->
     "#{@file.source} is a file!"
+
+  write: (data) ->
+    console.log data
