@@ -1,14 +1,21 @@
 Controller = require '../lib/Controller'
-FileModel = require '../models/FileModel'
+ImageModel = require '../models/ImageModel'
 
 module.exports = class ImageController extends Controller
-  find_or_fail: (id, done) ->
-    FileModel.findById id, (error, file) =>
-      @abort 500 if error
-      @abort 404 if not file
+  resize_params: ->
+    file_id: @params.id
+    scale: @params.scale
+    width: @params.width
+    height: @params.height
+    crop_origin_x: @params.crop_origin_x
+    crop_origin_y: @params.crop_origin_y
+    format: @params.format
 
-      done file
+  find_image: (done) ->
+    ImageModel.find_by_resize_params @resize_params, (image) ->
+      done image
 
   show_image_action: ->
-    @find_or_fail @params.id, (file) =>
-      @respond file.storage().content()
+    @find_image (image) =>
+      if image
+        @respond file.storage().content()

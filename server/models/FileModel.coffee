@@ -1,4 +1,5 @@
 schema = require './schema'
+Image = require './ImageModel'
 
 LocalStorage = require '../lib/Storage/Local'
 
@@ -13,6 +14,8 @@ File = schema.define 'File',
   created:
     type: schema.Date
     default: Date.now
+
+File.hasMany Image, as: 'images',  foreignKey: 'file_id'
 
 File.validatesPresenceOf 'source', 'extension'
 

@@ -1,46 +1,46 @@
 assert = require 'assert'
 global.config = require('konfig')()
 
-FileModel = require '../server/models/FileModel'
+ImageModel = require '../server/models/ImageModel'
 Storage = require '../server/lib/Storage'
 
 
-describe 'File', ->
-  file = null
+describe 'Image', ->
+  image = null
 
   beforeEach (done) ->
-    file = new FileModel
+    image = new ImageModel
       source: 'test.txt'
       extension: 'txt'
-    file.save done
+    image.save done
 
   describe 'Model', ->
 
     it 'can find by id', ->
-      FileModel.findById 1, (err, file) ->
-        assert.equal 1, file.id
+      ImageModel.findById 1, (err, image) ->
+        assert.equal 1, image.id
 
   describe 'Object', ->
 
     it 'should be a Model', ->
-      assert.equal file instanceof FileModel, true
+      assert.equal image instanceof ImageModel, true
 
     it 'should have an id', ->
-      assert.equal file.id?, true
+      assert.equal image.id?, true
 
     it 'should have a source', ->
-      assert.equal file.source?, true
+      assert.equal image.source?, true
 
     it 'should have an extension', ->
-      assert.equal file.extension?, true
+      assert.equal image.extension?, true
 
     it 'should have a created date', ->
-      assert.equal file.created?, true
+      assert.equal image.created?, true
 
     it 'should be valid', ->
-      file.isValid (valid) ->
+      image.isValid (valid) ->
         assert.equal valid, true
 
     it 'has storage', ->
-      storage = file.storage()
+      storage = image.storage()
       assert.equal storage instanceof Storage, true
