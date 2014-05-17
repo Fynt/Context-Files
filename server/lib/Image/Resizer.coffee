@@ -20,7 +20,12 @@ module.exports = class ImageResizer
         params.crop_origin_y
     # Resize
     else
-      gm_image.resize params.width, params.height, "!"
+      if params.width and not params.height
+        gm_image.resize params.width
+      else if params.height and not params.width
+        gm_image.resize null, params.height
+      else
+        gm_image.resize params.width, params.height, ">"
 
     # Stream the data for the resized image
     gm_image.stream (error, stdout, stderr) ->

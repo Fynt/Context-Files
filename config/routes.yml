@@ -7,9 +7,9 @@ default:
   'GET /file/download/:id': 'FileController#download_file'
 
   # Image routes
-  'GET /image/:width/:height/:id.:format': 'ImageController#show_image'
   'GET /image/width/:width/:id.:format': 'ImageController#show_image'
   'GET /image/height/:height/:id.:format': 'ImageController#show_image'
+  'GET /image/:width/:height/:id.:format': 'ImageController#show_image'
   'GET /image/scale/:scale/:id.:format': 'ImageController#show_image'
   'GET /image/:width/:height/:crop_origin_x/:crop_origin_y/:id.:format': 'ImageController#show_image'
   'GET /image/:scale/:width/:height/:crop_origin_x/:crop_origin_y/:id.:format': 'ImageController#show_image'
