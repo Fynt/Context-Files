@@ -7,8 +7,11 @@ describe 'Config', ->
   it 'should contain server settings', ->
     assert.equal config.server?, true
 
-  it 'should contain db settings', ->
+  it 'should define db settings', ->
     assert.equal config.server.db?, true
 
-  it 'should contain db driver', ->
+  it 'should define db driver', ->
     assert.equal config.server.db.driver, 'memory'
+
+  it 'should define storage adapter', ->
+    assert.equal config.server.storage, 'Mock'

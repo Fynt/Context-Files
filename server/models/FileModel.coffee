@@ -1,7 +1,6 @@
 schema = require './schema'
 Image = require './ImageModel'
 
-LocalStorage = require '../lib/Storage/Local'
 
 File = schema.define 'File',
   source:
@@ -20,6 +19,7 @@ File.hasMany Image, as: 'images',  foreignKey: 'file_id'
 File.validatesPresenceOf 'source', 'extension'
 
 File::storage = ->
-  new LocalStorage @
+  Storage = require "../lib/Storage/#{global.config.server.storage}"
+  new Storage @
 
 module.exports = File

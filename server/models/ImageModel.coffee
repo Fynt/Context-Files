@@ -1,7 +1,6 @@
 schema = require './schema'
 File = require './FileModel'
 
-LocalStorage = require '../lib/Storage/Local'
 
 Image = schema.define 'Image',
   scale:
@@ -36,6 +35,7 @@ Image = schema.define 'Image',
 Image.belongsTo File, as: 'source_file', foreignKey: 'file_id'
 
 Image::storage = ->
-  new LocalStorage @
+  Storage = require "../lib/Storage/#{global.config.server.storage}"
+  new Storage @
 
 module.exports = Image

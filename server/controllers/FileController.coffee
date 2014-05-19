@@ -35,7 +35,7 @@ module.exports = class FileController extends Controller
     FileModel.findById @params.id, (error, file) =>
       if file and not error
         @content_type file.storage().mimetype()
-        @respond file.storage().content()
+        @respond file.storage().read()
       else
         @abort 404
 
