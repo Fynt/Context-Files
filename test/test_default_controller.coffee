@@ -16,4 +16,9 @@ describe 'Default Controller', ->
     done()
 
   it 'has a health-check', ->
-    req.get('/health-check2').expect 200
+    req.get('/health-check').expect(200).end (error, res) ->
+      assert.equal error, null
+
+  it 'does not have a health-chuck', ->
+    req.get('/health-chuck').expect(404).end (error, res) ->
+      assert.equal error, null
