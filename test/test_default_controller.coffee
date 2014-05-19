@@ -5,7 +5,6 @@ config = require('konfig')()
 Application = require '../server/Application'
 
 
-
 describe 'Default Controller', ->
   req = null
 

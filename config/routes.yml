@@ -16,3 +16,4 @@ default:
 
   # Misc. routes
   'GET /health-check': 'DefaultController#health_check'
+  'GET /upload': 'DefaultController#upload'
