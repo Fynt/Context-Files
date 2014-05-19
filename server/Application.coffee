@@ -1,5 +1,6 @@
 fs = require 'fs'
 express = require 'express'
+multer  = require 'multer'
 
 # The Application class
 #
@@ -18,6 +19,9 @@ module.exports = class Application
   #
   # @private
   initialize: ->
+    # Add middleware for handling multipart form data.
+    @core.use multer dest: "#{__dirname}/../data/files"
+
     if @config.routes?
       @register_routes @config.routes
 

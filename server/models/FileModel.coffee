@@ -10,6 +10,8 @@ File = schema.define 'File',
     type: schema.String
     limit: 4
     index: true
+  size:
+    type: schema.Number
   created:
     type: schema.Date
     default: Date.now

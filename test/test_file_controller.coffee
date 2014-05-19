@@ -19,10 +19,6 @@ describe 'File Controller', ->
 
     file.save done
 
-  it 'can post a file', ->
-    req.post('/file').expect(200).end (error, res) ->
-      assert.equal error, null
-
   it 'can get a file', ->
     req.get('/file/1').expect(200).end (error, res) ->
       assert.equal error, null
@@ -34,13 +30,6 @@ describe 'File Controller', ->
   it 'can show a file', ->
     req.get '/file/show/1'
     .expect 'Content-Type', /text/
-    .expect 200
-    .end (error, res) ->
-      throw error if error
-      assert.equal error, null
-
-  it 'can download a file', ->
-    req.get '/file/download/1'
     .expect 200
     .end (error, res) ->
       throw error if error

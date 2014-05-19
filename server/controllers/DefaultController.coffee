@@ -12,9 +12,8 @@ module.exports = class DefaultController extends Controller
       </head>
       <body>
         <form action="/file" method="post" enctype="multipart/form-data">
-          <input type="file" name="file">
-          <input type="submit">
+          <input type="file" id="file" name="file">
+          <input type="submit" name="submit" value="Upload">
         </form>
       </body>
-    </html>
-    ')
+    </html>')

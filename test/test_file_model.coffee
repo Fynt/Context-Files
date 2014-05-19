@@ -12,6 +12,7 @@ describe 'File', ->
     file = new FileModel
       source: 'test.txt'
       extension: 'txt'
+      size: 123
     file.save done
 
   describe 'Model', ->
