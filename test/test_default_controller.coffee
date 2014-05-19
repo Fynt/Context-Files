@@ -16,4 +16,4 @@ describe 'Default Controller', ->
     done()
 
   it 'has a health-check', ->
-    req.get('/health-check').expect 200
+    req.get('/health-check2').expect 200
