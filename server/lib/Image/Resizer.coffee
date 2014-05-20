@@ -50,16 +50,10 @@ module.exports = class ImageResizer
     @resize()
 
     @gm_image.toBuffer (error, buffer) ->
+      # Create the image path.
+      image.source = "#{image.file_id}-#{image.width}-#{image.height}"
+      image.source += ".#{image.extension}"
 
-      # Update image with real dimensions.
-      gm(buffer).size (error, size) ->
-        image.width = size.width
-        image.height = size.height
+      image.storage().write(buffer)
 
-        # Create the image path.
-        image.source = "#{image.file_id}-#{image.width}-#{image.height}"
-        image.source += ".#{image.extension}"
-
-        image.storage().write(buffer)
-
-        callback image
+      callback image

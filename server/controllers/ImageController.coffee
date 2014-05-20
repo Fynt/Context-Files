@@ -8,8 +8,8 @@ module.exports = class ImageController extends Controller
   resize_params: ->
     file_id: @params.id
     scale: Number @params.scale or 1
-    width: parseInt @params.width
-    height: parseInt @params.height
+    width: parseInt @params.width or 0
+    height: parseInt @params.height or 0
     crop_origin_x: parseInt @params.crop_origin_x or 0
     crop_origin_y: parseInt @params.crop_origin_y or 0
     extension: @params.format
