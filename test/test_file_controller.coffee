@@ -16,7 +16,6 @@ describe 'File Controller', ->
     file = new FileModel
       source: 'test.txt'
       extension: 'txt'
-
     file.save done
 
   it 'can get a file', ->

@@ -32,17 +32,21 @@ module.exports = class ImageController extends Controller
       @abort 500 if error
       @abort 404 if not file
 
-      resizer = new ImageResizer file
+      resizer = new ImageResizer file.storage()
+      result = resizer.resize @resize_params()
 
+      # Stream the data for the resized image
       @content_type 'image/jpeg'
-      resizer.resize @resize_params(), @response
+      result.stream (error, stdout, stderr) =>
+        stdout.pipe @response
 
   find_or_resize_image: (done) ->
     @find_image (error, image) =>
-      done image if image
-
-      @resize_image (image) ->
+      if image
         done image
+      else
+        @resize_image (image) ->
+          done image if image
 
   show_image_action: ->
     @find_or_resize_image (image) =>

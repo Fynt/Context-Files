@@ -3,10 +3,10 @@ gm = require 'gm'
 module.exports = class ImageResizer
 
   # @param [FileModel] file The image to be resized.
-  constructor: (@file) ->
+  constructor: (@storage) ->
 
-  resize: (params, response) ->
-    gm_image = gm @file.storage().read(), @file.storage().filename()
+  resize: (params) ->
+    gm_image = gm @storage.read(), @storage.filename()
 
     # Scale the image if needed.
     if params.scale > 1
@@ -27,6 +27,4 @@ module.exports = class ImageResizer
       else
         gm_image.resize params.width, params.height, ">"
 
-    # Stream the data for the resized image
-    gm_image.stream (error, stdout, stderr) ->
-      stdout.pipe response
+    gm_image
