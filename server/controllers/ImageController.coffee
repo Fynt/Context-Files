@@ -12,7 +12,7 @@ module.exports = class ImageController extends Controller
     height: parseInt @params.height
     crop_origin_x: parseInt @params.crop_origin_x or 0
     crop_origin_y: parseInt @params.crop_origin_y or 0
-    format: @params.format
+    extension: @params.format
 
   find_image: (done) ->
     resize_params = @resize_params()
@@ -24,21 +24,30 @@ module.exports = class ImageController extends Controller
         'height': resize_params.height
         'crop_origin_x': resize_params.crop_origin_x
         'crop_origin_y': resize_params.crop_origin_y
-        'extension': resize_params.format,
+        'extension': resize_params.extension,
       done
 
   resize_image: (done) ->
     FileModel.findById @params.id, (error, file) =>
-      @abort 500 if error
-      @abort 404 if not file
+      return @abort 500 if error
+      return @abort 404 if not file
 
-      resizer = new ImageResizer file.storage()
-      result = resizer.resize @resize_params()
+      resizer = new ImageResizer file.storage(), @resize_params()
 
-      # Stream the data for the resized image
-      @content_type 'image/jpeg'
-      result.stream (error, stdout, stderr) =>
-        stdout.pipe @response
+      # Stream the data for the resized image so we can render the image before
+      # saving it to storage, which helps keep resizing-on-the-fly feel speedy.
+      resizer.resize (mimetype, image_stream) =>
+        @content_type mimetype
+        image_stream.pipe @response
+
+      #@create_image file, resizer
+
+  create_image: (file, resizer) ->
+    # Create a new image based on the resize params.
+    image = new ImageModel @resize_params()
+    resizer.write_to_image image, (image) ->
+      # Save the image to the db!
+      image.save()
 
   find_or_resize_image: (done) ->
     @find_image (error, image) =>

@@ -15,7 +15,13 @@ module.exports = class LocalStorage extends Storage
   # @todo Somehow make this more async?
   # @return [Buffer] The file content
   read: ->
-    fs.readFileSync @local_path()
+    try
+      fs.readFileSync @local_path()
+    catch e
+      console.error e
 
   write: (data) ->
-    fs.writeFileSync @local_path(), data
+    try
+      fs.writeFileSync @local_path(), data
+    catch e
+      console.error e
