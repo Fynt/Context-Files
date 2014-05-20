@@ -36,17 +36,21 @@ module.exports = class ImageController extends Controller
 
       # Stream the data for the resized image so we can render the image before
       # saving it to storage, which helps keep resizing-on-the-fly feel speedy.
-      resizer.resize (mimetype, image_stream) =>
+      resizer.write_to_stream (mimetype, image_stream) =>
         @content_type mimetype
         image_stream.pipe @response
 
-      #@create_image file, resizer
+      @create_image file, resizer
 
-  create_image: (file, resizer) ->
+  create_image: (file) ->
+    # We need a new instance of the resizer because it seems the streams are
+    # shared, which causes some funky behaviour, yet calling the stream a
+    # second time flushes the resize, so we're back to the original image.
+    resizer = new ImageResizer file.storage(), @resize_params()
+
     # Create a new image based on the resize params.
     image = new ImageModel @resize_params()
     resizer.write_to_image image, (image) ->
-      # Save the image to the db!
       image.save()
 
   find_or_resize_image: (done) ->

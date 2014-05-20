@@ -14,7 +14,7 @@ module.exports = class ImageResizer
   mimetype: ->
     mime.lookup @params.extension
 
-  resize: (callback) ->
+  resize: ->
     # Fix the image orientation.
     @gm_image.autoOrient()
 
@@ -40,13 +40,26 @@ module.exports = class ImageResizer
     # Strip EXIF data.
     @gm_image.noProfile()
 
+  write_to_stream: (callback) ->
+    @resize()
+
     @gm_image.stream (error, stdout, stderr) =>
       callback @mimetype(), stdout
 
   write_to_image: (image, callback) ->
-    @gm_image.stream (error, stdout, stderr) ->
-      gm(stdout).size (error, size) ->
+    @resize()
+
+    @gm_image.toBuffer (error, buffer) ->
+
+      # Update image with real dimensions.
+      gm(buffer).size (error, size) ->
         image.width = size.width
         image.height = size.height
+
+        # Create the image path.
+        image.source = "#{image.file_id}-#{image.width}-#{image.height}"
+        image.source += ".#{image.extension}"
+
+        image.storage().write(buffer)
 
         callback image
