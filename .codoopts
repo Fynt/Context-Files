@@ -1,0 +1,7 @@
+--name       "Context-Files"
+--readme     README.md
+--title      "Context Documentation"
+--private
+--extension  coffee
+--output     ./doc
+./server

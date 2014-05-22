@@ -1,3 +1,9 @@
+# Docs
+doc
+
+# Local storage
+data/
+
 # Logs
 logs
 *.log

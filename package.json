@@ -1,0 +1,26 @@
+{
+  "name": "Context-Files",
+  "version": "0.0.1",
+  "description": "File management module for context",
+  "main": "server.coffee",
+  "scripts": {
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha test --compilers coffee:coffee-script/register --reporter spec"
+  },
+  "author": "Ryan Leland",
+  "license": "ISC",
+  "dependencies": {
+    "caminte": "0.0.16",
+    "coffee-script": "^1.7.1",
+    "express": "^4.2.0",
+    "gm": "^1.16.0",
+    "konfig": "^0.1.1",
+    "mime": "^1.2.11",
+    "mocha": "^1.18.2",
+    "multer": "0.0.7",
+    "nodeunit": "^0.9.0",
+    "supertest": "^0.12.1"
+  },
+  "devDependencies": {
+    "sqlite3": "^2.2.3"
+  }
+}
